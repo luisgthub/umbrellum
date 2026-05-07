@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://hqvllqukrx8g"]
+
+[ext_resource type="Script" uid="uid://bphvf1sgskju5" path="res://infinite_screen.gd" id="1_hk757"]
+[ext_resource type="Texture2D" uid="uid://dmyp4ev66camc" path="res://assets/border.png" id="2_7gwcl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gwcl"]
+size = Vector2(18.666666, 354)
+
+[node name="infinite_screen" type="Node2D" unique_id=1407102457]
+script = ExtResource("1_hk757")
+
+[node name="left_border" type="StaticBody2D" parent="." unique_id=7969126]
+position = Vector2(-32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_border" unique_id=1408714503]
+position = Vector2(2.666667, 27)
+scale = Vector2(0.5, 10)
+shape = SubResource("RectangleShape2D_7gwcl")
+
+[node name="Sprite2D" type="Sprite2D" parent="left_border/CollisionShape2D" unique_id=2004643465]
+scale = Vector2(1, 40)
+texture = ExtResource("2_7gwcl")
+
+[node name="right_border" type="StaticBody2D" parent="." unique_id=1175267150]
+position = Vector2(316, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_border" unique_id=1794654643]
+position = Vector2(2.666667, 27)
+scale = Vector2(0.5, 10)
+shape = SubResource("RectangleShape2D_7gwcl")
+
+[node name="Sprite2D" type="Sprite2D" parent="right_border/CollisionShape2D" unique_id=100450124]
+scale = Vector2(1, 40)
+texture = ExtResource("2_7gwcl")
+
+[node name="top_border" type="StaticBody2D" parent="." unique_id=854902889]
+position = Vector2(1, -400)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_border" unique_id=791819107]
+position = Vector2(2, 144)
+shape = SubResource("RectangleShape2D_7gwcl")

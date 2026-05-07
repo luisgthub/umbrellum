@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c5wuii3sud0sp"]
+
+[ext_resource type="Script" uid="uid://crpkmwe8xwmug" path="res://score.gd" id="1_t1x8i"]
+
+[node name="Node2D" type="Control" unique_id=863354953]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_t1x8i")
+
+[node name="score" type="Label" parent="." unique_id=661290462]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 51.0
+offset_bottom = 25.0
+text = "SCORE"
+
+[node name="life" type="Label" parent="." unique_id=261705388]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 2.0
+offset_right = 130.0
+offset_bottom = 25.0
+text = "LIFE "

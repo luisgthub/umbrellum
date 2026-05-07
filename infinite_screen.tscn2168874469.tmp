@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://hqvllqukrx8g"]
+
+[ext_resource type="Script" uid="uid://bphvf1sgskju5" path="res://infinite_screen.gd" id="1_hk757"]
+
+[node name="infinite_screen" type="Node2D" unique_id=1407102457]
+script = ExtResource("1_hk757")

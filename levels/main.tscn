@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ppq1kn55fm26"]
+
+[ext_resource type="PackedScene" uid="uid://dutv56vo6fq8" path="res://player.tscn" id="2_wdj6m"]
+[ext_resource type="PackedScene" uid="uid://c5wuii3sud0sp" path="res://score.tscn" id="4_m1504"]
+[ext_resource type="PackedScene" uid="uid://hqvllqukrx8g" path="res://infinite_screen.tscn" id="6_5k4jt"]
+
+[node name="Main" type="Node2D" unique_id=413015832]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1773125963]
+
+[node name="score" parent="CanvasModulate" unique_id=464940664 instance=ExtResource("4_m1504")]
+offset_left = -356.0
+offset_top = -200.0
+offset_right = -303.0
+offset_bottom = -177.0
+
+[node name="infinite_screen" parent="." unique_id=1066264328 instance=ExtResource("6_5k4jt")]
+position = Vector2(-136, -72)
+
+[node name="Camera2D" type="Camera2D" parent="infinite_screen" unique_id=1439687489]
+position = Vector2(136, 222)
+offset = Vector2(0, -150)
+zoom = Vector2(1.5, 1.5)
+
+[node name="player" parent="." unique_id=1662886392 instance=ExtResource("2_wdj6m")]

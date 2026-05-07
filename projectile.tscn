@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dvp7jtqw0ep8r"]
+
+[ext_resource type="Script" uid="uid://dvl2clp3m118e" path="res://projectile.gd" id="1_a85iw"]
+[ext_resource type="Texture2D" uid="uid://dmyp4ev66camc" path="res://assets/border.png" id="2_qxf0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxf0c"]
+
+[node name="projectile" type="Area2D" unique_id=392835470 groups=["proj"]]
+script = ExtResource("1_a85iw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1976885749]
+texture = ExtResource("2_qxf0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=444804922]
+shape = SubResource("RectangleShape2D_qxf0c")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1733992463]
+amount = 32
+lifetime = 0.5
+speed_scale = 0.5
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, -100)

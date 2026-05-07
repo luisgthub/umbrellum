@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c4sy0eeayk1pw"]
+
+[ext_resource type="Script" uid="uid://cxtkkw81ismrp" path="res://game_over.gd" id="1_y26ei"]
+
+[node name="game_over" type="CanvasLayer" unique_id=1934628232]
+follow_viewport_scale = 2.0
+script = ExtResource("1_y26ei")
+
+[node name="Label" type="Label" parent="." unique_id=3345275]
+offset_left = 184.0
+offset_top = 187.0
+offset_right = 280.0
+offset_bottom = 210.0
+scale = Vector2(8, 8)
+text = "GAME OVER "
+
+[node name="try_again" type="Button" parent="." unique_id=177799576]
+z_index = 2
+texture_filter = 1
+offset_left = 475.0
+offset_top = 412.0
+offset_right = 586.0
+offset_bottom = 449.0
+scale = Vector2(2, 2)
+text = "TRY AGAIN"
+
+[connection signal="pressed" from="try_again" to="." method="_on_try_again_pressed"]

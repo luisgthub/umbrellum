@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dkxen0yt1f64j"]
+
+[ext_resource type="Texture2D" uid="uid://dl72661dsrwwm" path="res://assets/plant.png" id="1_t03al"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mbetm"]
+texture = ExtResource("1_t03al")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tr8xc"]
+sources/0 = SubResource("TileSetAtlasSource_mbetm")
+
+[node name="plant" type="TileMapLayer" unique_id=1031034248]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 253, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 255, 255, 0, 0, 0, 0, 1, 0, 0, 0)
+tile_set = SubResource("TileSet_tr8xc")

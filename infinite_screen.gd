@@ -1,10 +1,11 @@
 extends Node2D
 
 @onready var block_scene = preload("res://block.tscn")
-@onready var spark_scene = preload("res://spark.tscn")
+@onready var upgrade_scene = preload("res://upgrade.tscn")
 @onready var bomb_scene = preload("res://bomb.tscn")
-
+@onready var enemy_scene = preload("res://enemy/enemy.tscn")
 # Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	var mtimer = Timer.new()
 	add_child(mtimer)
@@ -20,7 +21,11 @@ func set_block_position():
 	var new_position_y =  global_position.y+rand_position_y
 	
 	create_block(new_position_x,new_position_y)
-	
+	create_enemy(rand_position_x,new_position_y)	
+	create_bomb(rand_position_x,new_position_y)
+	var rand_up_pos_x = randi_range(-16,186)	
+	var rand_up_pos_y = randi_range(380,400)
+	create_upgrade(rand_up_pos_x,rand_up_pos_y)
 func create_block(value_x,value_y):
 	print("valorx",value_x)
 	var rand_count = randi_range(1,6)
@@ -39,17 +44,11 @@ func create_block(value_x,value_y):
 	#chance de aparecer
 
 	var randc = randi_range(-16,132)
-	create_coins(value_x+randc,value_y+randc)
-	var randv = randi_range(-16,132)
-	create_bomb(value_x+randv,value_y+randv)
-		
-		
-		
-		
-func create_coins(value_x,value_y):
+
+func create_upgrade(value_x,value_y):
 	#var random_vertical_value = randf_range(-60,140)
 	var offset = Vector2(value_x,value_y)
-	var inst = spark_scene.instantiate()
+	var inst = upgrade_scene.instantiate()
 	inst.global_position = offset
 	get_tree().current_scene.add_child(inst)
 
@@ -57,5 +56,12 @@ func create_bomb(value_x,value_y):
 	#var random_vertical_value = randf_range(-60,140)
 	var offset = Vector2(value_x,value_y)
 	var inst = bomb_scene.instantiate()
+	inst.global_position = offset
+	get_tree().current_scene.add_child(inst)
+
+func create_enemy(value_x,value_y):
+	#var random_vertical_value = randf_range(-60,140)
+	var offset = Vector2(value_x,value_y)
+	var inst = enemy_scene.instantiate()
 	inst.global_position = offset
 	get_tree().current_scene.add_child(inst)

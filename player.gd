@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	#direction.y = 0
 	#print(direction)
 	global_position = direction.lerp(mouse_pos,speed)
+	Gmanager.player_position = global_position
 	#lerp angle muda a rotação de forma q vai pelo caminho mais rapido
 	#impede de girar sem controle
 	#rotation = lerp_angle(rotation,mouse_angle,0.01)
@@ -61,10 +62,8 @@ func get_input() -> void:
 	if Input.is_action_just_pressed("left_mouse"):
 		if current_state==State.OPENING:
 			change_state(State.CLOSING)
-			Gmanager.current_time=1.0
 			print("tempo resetado")
 		elif current_state==State.CLOSING:
-			Gmanager.current_time=2.0
 			print("tempo resetado")
 			change_state(State.OPENING)
 

@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://drntjfqohfjyd"]
 
-[ext_resource type="Script" uid="uid://bx1m7x6ypnp3d" path="res://spark.gd" id="1_6bmde"]
-[ext_resource type="Texture2D" uid="uid://dwrixuhndnecq" path="res://assets/spark.png" id="1_bge2m"]
+[ext_resource type="Script" uid="uid://bx1m7x6ypnp3d" path="res://upgrade.gd" id="1_hgitt"]
+[ext_resource type="Texture2D" uid="uid://by5adshyxkly0" path="res://assets/upgrade.png" id="2_hgitt"]
 
 [sub_resource type="Animation" id="Animation_6bmde"]
 length = 0.001
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,19 +44,29 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_bge2m"]
 radius = 8.062258
 
-[node name="spark" type="Area2D" unique_id=1847544034 groups=["spark"]]
-script = ExtResource("1_6bmde")
+[node name="upgrade" type="Area2D" unique_id=1847544034 groups=["spark"]]
+script = ExtResource("1_hgitt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133971832]
-texture = ExtResource("1_bge2m")
+texture = ExtResource("2_hgitt")
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=562914739]
 libraries/ = SubResource("AnimationLibrary_6bmde")
-autoplay = &"basic_spark"
+autoplay = &"RESET"
 speed_scale = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1900214981]
 shape = SubResource("CircleShape2D_bge2m")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=78624003]
+modulate = Color(0.043137256, 0.07450981, 0, 1)
+show_behind_parent = true
+lifetime = 0.4
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(5, 0)
+spread = 29.79
+gravity = Vector2(0, -200)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

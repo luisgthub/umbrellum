@@ -44,6 +44,7 @@ _data = {
 radius = 8.062258
 
 [node name="bomb" type="Area2D" unique_id=1847544034 groups=["spark"]]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_4fn8o")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133971832]

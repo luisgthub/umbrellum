@@ -83,7 +83,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
-radius = 22.36068
+radius = 6.0
 
 [node name="player" type="CharacterBody2D" unique_id=1662886392]
 texture_filter = 1
@@ -153,9 +153,11 @@ gravity = Vector2(0, -200)
 [node name="Area2D" type="Area2D" parent="PinJoint2D/umbrella" unique_id=977323375 groups=["umbrella"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PinJoint2D/umbrella/Area2D" unique_id=836184308]
-position = Vector2(-0.99999905, 11.000003)
+position = Vector2(1.7881393e-06, 20)
 rotation = 3.1415925
 shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Marker2D" type="Marker2D" parent="PinJoint2D/umbrella" unique_id=442919688]
-position = Vector2(0, -10)
+position = Vector2(0, -15)
+
+[connection signal="area_entered" from="PinJoint2D/umbrella/Area2D" to="." method="_on_area_entered"]

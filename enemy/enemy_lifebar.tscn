@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bs1gwjwguobs4"]
+
+[node name="enemy_lifebar" type="Label" unique_id=1432398498]
+offset_right = 10.0
+offset_bottom = 23.0

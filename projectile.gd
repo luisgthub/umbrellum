@@ -5,4 +5,7 @@ var proj_speed = 100
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.y +=proj_speed*delta
-	await get_tree().create_timer(0.5).timeout
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		queue_free()

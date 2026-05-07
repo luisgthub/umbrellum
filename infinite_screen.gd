@@ -4,6 +4,8 @@ extends Node2D
 @onready var upgrade_scene = preload("res://upgrade.tscn")
 @onready var bomb_scene = preload("res://bomb.tscn")
 @onready var enemy_scene = preload("res://enemy/enemy.tscn")
+@onready var coin_scene = preload("res://coin.tscn")
+
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
@@ -15,7 +17,7 @@ func _ready() -> void:
 	Gmanager.is_attacking=false
 
 func set_block_position():
-	var rand_position_x = randi_range(-16,208)
+	var rand_position_x = randi_range(-16,170)
 	var rand_position_y = 400
 	var new_position_x = global_position.x+rand_position_x
 	var new_position_y =  global_position.y+rand_position_y
@@ -24,7 +26,7 @@ func set_block_position():
 	create_enemy(rand_position_x,new_position_y)	
 	create_bomb(rand_position_x,new_position_y)
 	var rand_up_pos_x = randi_range(-16,186)	
-	var rand_up_pos_y = randi_range(380,400)
+	var rand_up_pos_y = randi_range(380,380)
 	create_upgrade(rand_up_pos_x,rand_up_pos_y)
 func create_block(value_x,value_y):
 	print("valorx",value_x)
@@ -41,6 +43,7 @@ func create_block(value_x,value_y):
 		var rand_squad_pos = randi_range(1,3)
 		if x>=rand_squad_pos:	
 			inst.global_position = Vector2(value_x+32*rand_squad_pos,value_y+34)
+			create_coin(value_x+32*rand_squad_pos,value_y+34)
 	#chance de aparecer
 
 	var randc = randi_range(-16,132)
@@ -52,6 +55,13 @@ func create_upgrade(value_x,value_y):
 	inst.global_position = offset
 	get_tree().current_scene.add_child(inst)
 
+func create_coin(value_x,value_y):
+	#var random_vertical_value = randf_range(-60,140)
+	var offset = Vector2(value_x,value_y)
+	var inst = coin_scene.instantiate()
+	inst.global_position = offset
+	get_tree().current_scene.add_child(inst)
+	
 func create_bomb(value_x,value_y):
 	#var random_vertical_value = randf_range(-60,140)
 	var offset = Vector2(value_x,value_y)

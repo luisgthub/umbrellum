@@ -9,10 +9,10 @@ script = ExtResource("1_t1x8i")
 
 [node name="score" type="Label" parent="." unique_id=661290462]
 layout_mode = 0
+offset_left = 5.0
 offset_top = 2.0
-offset_right = 51.0
+offset_right = 56.0
 offset_bottom = 25.0
-text = "SCORE"
 
 [node name="life" type="Label" parent="." unique_id=261705388]
 layout_mode = 0
@@ -20,4 +20,17 @@ offset_left = 90.0
 offset_top = 2.0
 offset_right = 130.0
 offset_bottom = 25.0
-text = "LIFE "
+
+[node name="upgrade_coin" type="Label" parent="." unique_id=1649599640]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 30.0
+offset_right = 115.0
+offset_bottom = 53.0
+
+[node name="actual_upgrade" type="Label" parent="." unique_id=750013402]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 57.0
+offset_right = 115.0
+offset_bottom = 80.0

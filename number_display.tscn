@@ -5,5 +5,4 @@
 [node name="number_display" type="Label" unique_id=731531118]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "kill"
 script = ExtResource("1_gxxe5")

@@ -4,13 +4,15 @@ var current_state = State.OPENING
 @onready var proj_scene = preload("res://projectile.tscn")
 @onready var umbrella_colision = $PinJoint2D/umbrella/CollisionShape2D
 @onready var anim = $PinJoint2D/umbrella/AnimationPlayer
+@onready var mark = $PinJoint2D/umbrella/Marker2D
 const speed = 0.3
 var is_damage_taken =true
-
+var up_level = 0
 func _ready() -> void:
+	up_level = Gmanager.upgrade_level
 	var mtimer = Timer.new()
 	add_child(mtimer)
-	mtimer.wait_time =0.3
+	mtimer.wait_time =0.6
 	mtimer.timeout.connect(shoot)
 	mtimer.start()
 	
@@ -30,7 +32,7 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		$AnimationPlayer.play("idle")
-	mouse_pos.y = 100
+	mouse_pos.y = -400
 	var direction = global_position.direction_to(mouse_pos)
 	#direction.y = 0
 	#print(direction)
@@ -45,7 +47,7 @@ func _physics_process(delta: float) -> void:
 			is_damage_taken = false
 			print("Bati em: ", colisao.get_collider().name)
 			apply_damage()
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(3.0).timeout
 			is_damage_taken = true
 
 func apply_damage():
@@ -53,11 +55,14 @@ func apply_damage():
 func _process(delta: float) -> void:
 		get_input()
 func shoot():
-	var inst = proj_scene.instantiate()
-	inst.global_position = $PinJoint2D/umbrella/Marker2D.global_position
-	get_tree().current_scene.add_child(inst)
-	get_tree().create_timer(0.8).timeout.connect(inst.queue_free)
-
+		var scale_value = up_level*0.5
+		var offset = 5*scale_value
+		var inst = proj_scene.instantiate()
+		inst.global_position = mark.global_position +Vector2(0,offset)
+		get_tree().current_scene.add_child(inst)
+		get_tree().create_timer(5.0).timeout.connect(inst.queue_free)
+		#permite que o marker sempre esteja num offset a frente do guardachuva
+		inst.scale=Vector2(scale_value,scale_value)
 func get_input() -> void:
 	if Input.is_action_just_pressed("left_mouse"):
 		if current_state==State.OPENING:
@@ -67,8 +72,9 @@ func get_input() -> void:
 			print("tempo resetado")
 			change_state(State.OPENING)
 
-func _on_umbrella_body_entered(body: Node) -> void:
-	print("opa")
-	if body.is_in_group("block"):
-		Gmanager.player_life-=5
-		await get_tree().create_timer(1.0).timeout
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("proj"):
+		if Gmanager.player_life>0:
+			Gmanager.player_life-=1
+	

@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var block_scene = preload("res://block.tscn")
+@onready var heal_block_scene = preload("res://block/heal_block.tscn")
 @onready var upgrade_scene = preload("res://upgrade.tscn")
 @onready var bomb_scene = preload("res://bomb.tscn")
 @onready var enemy_scene = preload("res://enemy/enemy.tscn")
@@ -21,13 +22,26 @@ func set_block_position():
 	var rand_position_y = 400
 	var new_position_x = global_position.x+rand_position_x
 	var new_position_y =  global_position.y+rand_position_y
-	
-	create_block(new_position_x,new_position_y)
-	create_enemy(rand_position_x,new_position_y)	
-	create_bomb(rand_position_x,new_position_y)
-	var rand_up_pos_x = randi_range(-16,186)	
+
+	var rand_up_pos_x = randi_range(-16,170)	
 	var rand_up_pos_y = randi_range(380,380)
-	create_upgrade(rand_up_pos_x,rand_up_pos_y)
+	#gera numero aleatorio
+	var choose_random_item = randi_range(1,100)
+	var chance_enemy = 40+Gmanager.upgrade_level
+	chance_enemy=min(chance_enemy,80)
+	var chance_bomb= 30+Gmanager.upgrade_level
+	chance_enemy=min(chance_enemy,80)
+	if choose_random_item<=20:
+		create_upgrade(rand_up_pos_x,rand_up_pos_y)
+	elif choose_random_item<=chance_bomb:
+		create_bomb(rand_position_x,new_position_y)
+	elif choose_random_item<=chance_enemy:
+		create_enemy(rand_position_x,new_position_y)
+	elif choose_random_item<=50:
+		create_heal_block(new_position_x,new_position_y)	
+	elif choose_random_item<=80:
+		create_block(new_position_x,new_position_y)
+
 func create_block(value_x,value_y):
 	print("valorx",value_x)
 	var rand_count = randi_range(1,6)
@@ -47,6 +61,13 @@ func create_block(value_x,value_y):
 	#chance de aparecer
 
 	var randc = randi_range(-16,132)
+
+func create_heal_block(value_x,value_y):
+	#var random_vertical_value = randf_range(-60,140)
+	var offset = Vector2(value_x,value_y)
+	var inst = heal_block_scene.instantiate()
+	inst.global_position = offset
+	get_tree().current_scene.add_child(inst)
 
 func create_upgrade(value_x,value_y):
 	#var random_vertical_value = randf_range(-60,140)

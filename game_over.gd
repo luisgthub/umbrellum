@@ -19,6 +19,7 @@ func _on_try_again_pressed() -> void:
 	Gmanager.points = 0
 	Gmanager.upgrade_coins = 0
 	Gmanager.upgrade_level = 0
+	Gmanager.current_weapon = "weapon1"
 	Gmanager.is_game_over=false
 	get_tree().reload_current_scene()
 	self.queue_free()

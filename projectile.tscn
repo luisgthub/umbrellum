@@ -1,56 +1,17 @@
 [gd_scene format=3 uid="uid://dvp7jtqw0ep8r"]
 
 [ext_resource type="Script" uid="uid://dvl2clp3m118e" path="res://projectile.gd" id="1_a85iw"]
-[ext_resource type="Texture2D" uid="uid://dmyp4ev66camc" path="res://assets/border.png" id="2_qxf0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxf0c"]
 size = Vector2(14, 14)
 
-[sub_resource type="Animation" id="Animation_qxf0c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_dgwo2"]
-resource_name = "basic"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.21, 0.32, 0.43333334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 2, 4]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxmqc"]
-_data = {
-&"RESET": SubResource("Animation_qxf0c"),
-&"basic": SubResource("Animation_dgwo2")
-}
-
 [node name="projectile" type="Area2D" unique_id=392835470 groups=["proj"]]
+z_index = 2
 script = ExtResource("1_a85iw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1976885749]
 position = Vector2(-5.9604645e-08, 0)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_qxf0c")
-hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=444804922]
 scale = Vector2(0.5, 0.5)
@@ -63,10 +24,5 @@ speed_scale = 0.5
 emission_shape = 1
 emission_sphere_radius = 5.0
 gravity = Vector2(0, -100)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1537042600]
-libraries/ = SubResource("AnimationLibrary_sxmqc")
-autoplay = &"basic"
-speed_scale = 5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

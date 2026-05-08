@@ -22,6 +22,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_bge2m"]
 resource_name = "basic_spark"
 length = 1.8333334
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,7 +30,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.73333335, 1.1, 1.4666667),
+"times": PackedFloat32Array(0, 0.26666668, 0.53333336, 0.8, 1.0666667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]

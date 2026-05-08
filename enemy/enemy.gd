@@ -1,7 +1,7 @@
 extends Area2D
 @onready var proj_scene = preload("res://projectile.tscn")
 @onready var lifebar_scene = preload("res://enemy/enemy_lifebar.tscn")
-var enemy_life = clamp(3,0,3)
+var enemy_life = clamp(6,0,6)
 var enemy_speed = 40
 @onready var sprite = $Sprite2D
 @onready var sprite_proj = load("res://assets/spark.png")
@@ -16,10 +16,10 @@ var enemy_speed = 40
 func randomize_enemy():
 	
 	var enemies_data = {
-	enemy1:0.5,
-	enemy2:0.25,
-	enemy3:0.15,
-	enemy4:0.10,
+	enemy1:0.6,
+	enemy2:0.4,
+	enemy3:0.3,
+	enemy4:0.2,
 }
 	var selected_texture= null
 	var sort = randf_range(0.0,1.0)

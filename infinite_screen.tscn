@@ -29,6 +29,7 @@ position = Vector2(316, 0)
 position = Vector2(2.666667, 27)
 scale = Vector2(0.5, 10)
 shape = SubResource("RectangleShape2D_7gwcl")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="right_border/CollisionShape2D" unique_id=100450124]
 scale = Vector2(1, 40)

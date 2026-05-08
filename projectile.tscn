@@ -11,14 +11,12 @@ script = ExtResource("1_a85iw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1976885749]
 position = Vector2(-5.9604645e-08, 0)
-scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=444804922]
-scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_qxf0c")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1733992463]
-amount = 16
+amount = 32
 lifetime = 0.1
 speed_scale = 0.5
 emission_shape = 1

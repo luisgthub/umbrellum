@@ -45,7 +45,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_bge2m"]
 radius = 18.0
 
-[node name="upgrade" type="Area2D" unique_id=1847544034 groups=["spark"]]
+[node name="upgrade" type="Area2D" unique_id=1847544034 groups=["upgrade"]]
 script = ExtResource("1_hgitt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133971832]

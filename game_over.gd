@@ -21,5 +21,6 @@ func _on_try_again_pressed() -> void:
 	Gmanager.upgrade_level = 0
 	Gmanager.current_weapon = "weapon1"
 	Gmanager.is_game_over=false
+	Gmanager.player_node = null
 	get_tree().reload_current_scene()
 	self.queue_free()

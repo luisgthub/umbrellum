@@ -8,15 +8,16 @@ extends Node2D
 @onready var coin_scene = preload("res://coin.tscn")
 
 # Called when the node enters the scene tree for the first time.
-
+var player = null
 func _ready() -> void:
+	player = Gmanager.player_node
 	var mtimer = Timer.new()
 	add_child(mtimer)
 	mtimer.wait_time = Gmanager.current_time
 	mtimer.timeout.connect(set_block_position)
 	mtimer.start()
 	Gmanager.is_attacking=false
-
+	
 func set_block_position():
 	var rand_position_x = randi_range(-16,170)
 	var rand_position_y = 400
@@ -31,17 +32,16 @@ func set_block_position():
 	chance_enemy=min(chance_enemy,80)
 	var chance_bomb= 30+Gmanager.upgrade_level
 	chance_enemy=min(chance_enemy,80)
-	if choose_random_item<=20:
-		create_upgrade(rand_up_pos_x,rand_up_pos_y)
-	elif choose_random_item<=chance_bomb:
-		create_bomb(rand_position_x,new_position_y)
+	if choose_random_item<=90:
+		create_block(new_position_x,new_position_y)
 	elif choose_random_item<=chance_enemy:
 		create_enemy(rand_position_x,new_position_y)
-	elif choose_random_item<=50:
-		create_heal_block(new_position_x,new_position_y)	
-	elif choose_random_item<=80:
-		create_block(new_position_x,new_position_y)
-
+	elif choose_random_item<=chance_bomb:
+		create_bomb(rand_position_x,new_position_y)
+	elif choose_random_item<=20:
+		create_heal_block(new_position_x,new_position_y)		
+	elif choose_random_item<=15:
+		create_upgrade(rand_up_pos_x,rand_up_pos_y)
 func create_block(value_x,value_y):
 	print("valorx",value_x)
 	var rand_count = randi_range(1,6)
@@ -96,3 +96,16 @@ func create_enemy(value_x,value_y):
 	var inst = enemy_scene.instantiate()
 	inst.global_position = offset
 	get_tree().current_scene.add_child(inst)
+	
+func _process(delta: float) -> void:
+
+	if Gmanager.player_node:
+		var screen_size = get_viewport_rect().size
+		var marginx = 142
+		var marginy = -180
+
+		# Limitamos a posição do player diretamente pelo script do mapa
+		Gmanager.player_node.global_position.x = clampf(Gmanager.player_node.global_position.x, -marginx, screen_size.x -1010)
+		Gmanager.player_node.global_position.y = clampf(Gmanager.player_node.global_position.y, marginy, screen_size.y - 750)
+		
+	

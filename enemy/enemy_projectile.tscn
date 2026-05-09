@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bhflc7jpypvdx"]
+
+[ext_resource type="Script" uid="uid://dyhrpj4v6h03u" path="res://enemy/enemy_projectile.gd" id="1_dtmql"]
+[ext_resource type="Texture2D" uid="uid://cqullqqodmo0v" path="res://assets/enemy_proj.png" id="2_dtmql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxf0c"]
+size = Vector2(14, 14)
+
+[node name="enemy_projectile" type="Area2D" unique_id=392835470]
+z_index = 2
+script = ExtResource("1_dtmql")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1976885749]
+modulate = Color(1, 0.05882353, 0.27058825, 1)
+position = Vector2(-5.9604645e-08, 0)
+texture = ExtResource("2_dtmql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=444804922]
+shape = SubResource("RectangleShape2D_qxf0c")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1733992463]
+modulate = Color(1, 0.13333334, 0.09803922, 1)
+self_modulate = Color(1, 0.07450981, 0.039215688, 1)
+amount = 32
+lifetime = 0.1
+speed_scale = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+gravity = Vector2(0, 100)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

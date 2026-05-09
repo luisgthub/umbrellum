@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://d7upw3sign26" path="res://sounds/Hurt.wav" id="5_sweqy"]
 [ext_resource type="AudioStream" uid="uid://uvn7jmbdaqcv" path="res://sounds/coin.wav" id="6_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://duw45smv0fyti" path="res://sounds/upgrade.wav" id="7_1jxqw"]
+[ext_resource type="AudioStream" uid="uid://ll2rftmjicaq" path="res://sounds/heal.wav" id="8_dw050"]
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 1.9666667
@@ -113,15 +114,16 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
-size = Vector2(38.999996, 53)
+size = Vector2(30.999998, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
-size = Vector2(39, 53)
+size = Vector2(31, 53)
 
 [node name="player" type="CharacterBody2D" unique_id=1662886392]
 texture_filter = 1
 input_pickable = true
 motion_mode = 1
+safe_margin = 0.2
 script = ExtResource("1_4flbx")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1483818417]
@@ -172,7 +174,7 @@ gravity = Vector2(0, -200)
 [node name="Area2D" type="Area2D" parent="PinJoint2D/umbrella" unique_id=977323375 groups=["umbrella"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PinJoint2D/umbrella/Area2D" unique_id=836184308]
-position = Vector2(-0.5000019, 8.5)
+position = Vector2(-0.5, 8.5)
 rotation = 3.1415925
 shape = SubResource("RectangleShape2D_i3pqv")
 
@@ -207,6 +209,10 @@ volume_db = 1.0
 
 [node name="upgrade" type="AudioStreamPlayer2D" parent="." unique_id=1347744921]
 stream = ExtResource("7_1jxqw")
+volume_db = 1.0
+
+[node name="heal" type="AudioStreamPlayer2D" parent="." unique_id=2033696054]
+stream = ExtResource("8_dw050")
 volume_db = 1.0
 
 [connection signal="area_entered" from="PinJoint2D/umbrella/Area2D" to="." method="_on_area_entered"]

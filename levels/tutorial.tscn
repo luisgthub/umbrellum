@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cx0y5lawjmkme"]
+
+[ext_resource type="Script" uid="uid://o4248o4ksyux" path="res://levels/tutorial.gd" id="1_khcq3"]
+
+[node name="CenterContainer" type="Control" unique_id=1123604841]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_vertical = 8
+script = ExtResource("1_khcq3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=34383168]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 308.0
+offset_right = 604.0
+offset_bottom = 339.0
+alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=1563944259]
+
+[node name="Label" type="Label" parent="." unique_id=1802625465]
+modulate = Color(1, 1, 0.9764706, 1)
+layout_mode = 0
+offset_left = 491.0
+offset_top = 200.0
+offset_right = 660.0
+offset_bottom = 294.0
+text = "HOW TO PLAY:
+
+MOUSE - DIRECTIONS "
+
+[node name="start" type="Button" parent="." unique_id=2111700990]
+modulate = Color(1, 1, 0.9764706, 1)
+layout_mode = 0
+offset_left = 547.0
+offset_top = 331.0
+offset_right = 603.0
+offset_bottom = 362.0
+text = "START"
+
+[node name="Label2" type="Label" parent="." unique_id=93394013]
+modulate = Color(1, 1, 0.9764706, 1)
+layout_mode = 0
+offset_left = 494.0
+offset_top = 279.0
+offset_right = 663.0
+offset_bottom = 302.0
+text = "R - RELOAD"
+
+[node name="Label3" type="Label" parent="." unique_id=1873249842]
+modulate = Color(1, 1, 0.9764706, 1)
+layout_mode = 0
+offset_left = 446.0
+offset_top = 378.0
+offset_right = 691.0
+offset_bottom = 401.0
+text = "OBJECTIVE - REACH HIGH SCORE"
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]

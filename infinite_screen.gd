@@ -17,29 +17,29 @@ func _ready() -> void:
 	mtimer.timeout.connect(set_block_position)
 	mtimer.start()
 	Gmanager.is_attacking=false
-	
+
 func set_block_position():
 	var rand_position_x = randi_range(-16,170)
 	var rand_position_y = 400
 	var new_position_x = global_position.x+rand_position_x
 	var new_position_y =  global_position.y+rand_position_y
-	var rand_coin = randi_range(-16,160)
+	var rand_coin = randi_range(-16,60)
 	var rand_up_pos_x = randi_range(-16,170)	
 	var rand_up_pos_y = randi_range(380,380)
 	#gera numero aleatorio
 
-	var chance_enemy = min(60 + Gmanager.upgrade_coins / 5, 80)
-	var chance_bomb = min(25 + Gmanager.upgrade_coins / 5, 40)
+	var chance_enemy = min(60 + Gmanager.upgrade_coins / 10, 80)
+	var chance_bomb = min(20 + Gmanager.upgrade_coins / 10, 40)
 	var choose_random_item = randi_range(1,100)
 	#create block
 	create_block(new_position_x,new_position_y)
 	
-	create_coin(new_position_x+rand_coin,new_position_y+rand_coin)
-	if choose_random_item<=10:
+	spawn_coins(rand_coin,new_position_y+rand_coin)
+	if randi_range(1, 100) <= 10:
 		create_upgrade(rand_up_pos_x,rand_up_pos_y)	
-	elif choose_random_item<=25:
+	elif randi_range(1, 100) <=25:
 		create_heal_block(rand_position_x,new_position_y)		
-	elif choose_random_item<=chance_bomb:
+	elif randi_range(1, 100) <= chance_bomb:
 		create_bomb(rand_position_x,new_position_y)
 	elif choose_random_item<=chance_enemy:
 		var rand_qt = randi_range(1,3)
@@ -70,6 +70,7 @@ func create_block(value_x,value_y):
 	var randc = randi_range(-16,132)
 
 func create_heal_block(value_x,value_y):
+	print("heal block criado")
 	#var random_vertical_value = randf_range(-60,140)
 	var offset = Vector2(value_x,value_y)
 	var inst = heal_block_scene.instantiate()
@@ -104,6 +105,17 @@ func create_enemy(value_x,value_y):
 	inst.global_position = offset
 	get_tree().current_scene.add_child(inst)
 	
+func spawn_coins(pos_x, pos_y):
+	var formation_type = randi_range(1, 2)
+	
+	if formation_type == 1: # Linha Horizontal
+		for i in range(3):
+			create_coin(pos_x + (i * 60), pos_y)
+	elif formation_type == 2: # Triângulo
+		create_coin(pos_x, pos_y)
+		create_coin(pos_x - 40, pos_y + 40)
+		create_coin(pos_x - 80, pos_y + 40)	
+		
 func _process(delta: float) -> void:
 	
 	if Gmanager.player_node:

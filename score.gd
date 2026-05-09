@@ -11,7 +11,7 @@ func deal_damage():
 func upgrade_coin():
 	$upgrade_coin.text ="UPGRADE COINS: "+str(Gmanager.upgrade_coins)
 func actual_upgrade():
-	$actual_upgrade.text ="UPGRADE LV: "+str(Gmanager.upgrade_level)
+	$actual_upgrade.text ="CURRENT WEAPON: "+str(Gmanager.current_weapon)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

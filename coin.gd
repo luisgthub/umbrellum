@@ -13,8 +13,11 @@ func _on_area_entered(area: Area2D) -> void:
 
 	if area.is_in_group("umbrella"):
 		Gmanager.points+= 15
-		Gmanager.count_upgrade_level()
+		Gmanager.upgrade_coins +=1
+		Gmanager.enemy_speed+=0.5
+		Gmanager.en_proj_speed-=0.5
+
 		create_display()
 		queue_free()
-	if global_position.y<=-500:
+	if global_position.y<=-400:
 		queue_free()

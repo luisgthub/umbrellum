@@ -40,7 +40,7 @@ position = Vector2(1, -400)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_border" unique_id=791819107]
-position = Vector2(2, 144)
+position = Vector2(62, 143)
 shape = SubResource("RectangleShape2D_7gwcl")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1759283496]

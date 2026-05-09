@@ -10,10 +10,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position.y -= Gmanager.block_speed*delta
-	if position.y>=400:
-		queue_free()
+
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if global_position.y<=-500:
+	if global_position.y<=-400:
 			queue_free()

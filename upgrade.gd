@@ -33,5 +33,5 @@ func _on_area_entered(area: Area2D) -> void:
 		Gmanager.current_weapon = identity_weapon
 		queue_free()
 		create_display()
-	if global_position.y<=-500:
+	if global_position.y<=-400:
 		queue_free()

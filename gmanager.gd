@@ -1,12 +1,14 @@
 extends Node
 @onready var gm_over_scene = preload("res://game_over.tscn")
 var points = 0
-var enemy_speed = 0.1
+var proj_speed =200
+var en_proj_speed = -150
+var enemy_speed = clamp(20,20,100)
 var player_node: CharacterBody2D = null
 var current_weapon="weapon1"
 var upgrade_coins = 0
 var upgrade_level = 1
-var player_life = max(0,10)
+var player_life = clamp(20,0,20)
 var enemy_life = clamp(3,0,3)
 var player_position = null
 var is_game_over = false
@@ -20,7 +22,7 @@ var damage = 1
 
 var weapons = {
 	"weapon1":{
-		"sprite":preload("res://assets/border.png"),
+		"sprite":preload("res://assets/proj_player.png"),
 		"type":"CC",
 		"colision": Vector2(1, 1)
 		},
@@ -56,8 +58,7 @@ func choose_weapon():
 	return choosen_weapon
 	#current_weapon = choosen_weapon	
 func _ready() -> void:
-	enemy_speed+=upgrade_coins/10
-	print(enemy_speed)
+
 	#timer
 	var mtimer = Timer.new()
 	add_child(mtimer)
@@ -65,8 +66,8 @@ func _ready() -> void:
 	mtimer.timeout.connect(weapon_timer)
 	mtimer.start()
 	#end timer
-	enemy_life=3
-	player_life= 10
+	enemy_life=4
+	player_life= 20
 	points = 0
 	pass # Replace with function body.
 func weapon_timer():

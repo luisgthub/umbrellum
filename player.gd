@@ -15,12 +15,18 @@ func _ready() -> void:
 	up_level = Gmanager.upgrade_level
 	var mtimer = Timer.new()
 	add_child(mtimer)
-	mtimer.wait_time =0.2
+	mtimer.wait_time =0.3
 	mtimer.timeout.connect(shoot)
 	mtimer.start()
 	
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("reload"):
+		Gmanager.player_life = 20
+		Gmanager.points = 0
+		Gmanager.upgrade_coins = 0
+		get_tree().reload_current_scene()	
+		
 	# get mouse position
 	var mouse_pos = get_global_mouse_position()
 	var direction =global_position.direction_to(mouse_pos)
@@ -54,7 +60,7 @@ func shoot():
 		inst.global_position = mark.global_position +Vector2(0,offset)
 	
 		get_tree().current_scene.add_child(inst)
-		get_tree().create_timer(0.5).timeout.connect(inst.queue_free)
+		get_tree().create_timer(1.0).timeout.connect(inst.queue_free)
 		#permite que o marker sempre esteja num offset a frente do guardachuva
 		inst.scale=Vector2(scale_value,scale_value)
 
@@ -72,8 +78,13 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("upgrade"):
 		Gmanager.current_weapon = Gmanager.choosen_weapon	
 	if area.is_in_group("coin"):
+		Gmanager.enemy_speed+=Gmanager.upgrade_coins/50
+		print(Gmanager.enemy_speed)
 		$coin.play()
 		$coin.pitch_scale=randf_range(0.60,0.8)
 	if area.is_in_group("upgrade"):
 		$upgrade.play()
 		$upgrade.pitch_scale=randf_range(0.50,0.9)
+	if area.is_in_group("heal_block"):
+		$heal.play()
+		$heal.pitch_scale=randf_range(0.50,0.9)

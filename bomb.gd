@@ -5,11 +5,11 @@ extends Area2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.y -= Gmanager.block_speed*delta
-	if global_position.y<=-400:
-		queue_free()
+func _ready() -> void:
+	$explosion.visible = false
 func anim():
 	var tween = create_tween()
-
+	$explosion.visible = true	
 	if $AnimationPlayer.has_animation("explosion"):
 		$AnimationPlayer.play("explosion")
 		$explode.play()
@@ -21,5 +21,5 @@ func _on_area_entered(area: Area2D) -> void:
 		if Gmanager.player_life>0:
 			Gmanager.player_life-= 1
 		anim()
-	if global_position.y<=-500:
+	if global_position.y<=-400:
 			queue_free()

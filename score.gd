@@ -18,5 +18,5 @@ func _process(delta: float) -> void:
 	add_score()
 	deal_damage()
 	upgrade_coin()
-	actual_upgrade()
+	#actual_upgrade()
 	pass

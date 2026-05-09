@@ -1,8 +1,8 @@
 extends Area2D
 @onready var proj_scene = preload("res://projectile.tscn")
 @onready var lifebar_scene = preload("res://enemy/enemy_lifebar.tscn")
-var enemy_life = clamp(6,0,6)
-var enemy_speed = 40
+var enemy_life = max(4,0)
+		
 @onready var sprite = $Sprite2D
 @onready var sprite_proj = load("res://assets/spark.png")
 @onready var enemy1 = load("res://enemy/cloud1.png")
@@ -12,14 +12,14 @@ var enemy_speed = 40
 # Called when the node enters the scene tree for the first time.
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-
+var en_speed = 0.1
 func randomize_enemy():
 	
 	var enemies_data = {
-	enemy1:0.6,
-	enemy2:0.4,
-	enemy3:0.3,
-	enemy4:0.2,
+	enemy1:0.4,
+	enemy2:0.3,
+	enemy3:0.2,
+	enemy4:0.1,
 }
 	var selected_texture= null
 	var sort = randf_range(0.0,1.0)
@@ -40,6 +40,7 @@ func update_label():
 		bar_inst.text = str(enemy_life)
 		flash()
 func _ready() -> void:
+	en_speed =Gmanager.upgrade_coins/20
 	bar_inst = lifebar_scene.instantiate()
 	bar_inst.text = str(enemy_life)
 	add_child(bar_inst)
@@ -47,7 +48,7 @@ func _ready() -> void:
 	randomize_enemy()
 	var mtimer = Timer.new()
 	add_child(mtimer)
-	mtimer.wait_time =0.8
+	mtimer.wait_time =0.5
 	mtimer.timeout.connect(follow_player)
 	mtimer.start()
 func flash():
@@ -55,8 +56,8 @@ func flash():
 	tween.tween_property(sprite,"modulate",Color(1,0,0),0.1)
 	tween.tween_property(sprite,"modulate",Color(1,1,1),0.1)	
 func follow_player():
-	global_position = global_position.lerp(Gmanager.player_position,0.1)
-	shoot()
+	global_position = global_position.lerp(Gmanager.player_position,Gmanager.enemy_speed)
+
 func shoot():
 	var inst = proj_scene.instantiate()
 	inst.proj_speed = -200
@@ -72,11 +73,24 @@ func anim():
 		$AnimationPlayer.play("explosion")
 		await $AnimationPlayer.animation_finished
 	queue_free()
-		
+func die_logic():
+	is_dead=true
+	Gmanager.points+=20
+	$dead.play()
+var is_dead = false		
 func _on_area_entered(area: Area2D) -> void:
+	if is_dead: return
+	if area.is_in_group("umbrella"):
+		Gmanager.player_life-=1
+
 	if area.is_in_group("proj"):
-		update_label()
+		$hurt.play()
+		$hurt.pitch_scale=randf_range(0.50,0.9)
 		enemy_life-=1
+		enemy_life = max(enemy_life, 0)
+		update_label()
 		if enemy_life<=0:
-			Gmanager.points+=20
+			die_logic()
 			anim()
+	if global_position.y<=-500:
+		queue_free()

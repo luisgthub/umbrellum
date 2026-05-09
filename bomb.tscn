@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djoh72bbkgeuy" path="res://bomb.gd" id="1_4fn8o"]
 [ext_resource type="Texture2D" uid="uid://02vfb0kwyfim" path="res://assets/black_spark.png" id="2_4fn8o"]
 [ext_resource type="Texture2D" uid="uid://cvj3o50b8ft5r" path="res://assets/explosion1.png" id="3_nfxiy"]
+[ext_resource type="AudioStream" uid="uid://bjox3py1rv8t7" path="res://sounds/Boom18.wav" id="4_6w74q"]
 
 [sub_resource type="Animation" id="Animation_6bmde"]
 length = 0.001
@@ -72,10 +73,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bge2m"]
-radius = 6.666667
+radius = 7.2
 
 [node name="bomb" type="Area2D" unique_id=1847544034 groups=["spark"]]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(3, 3)
 script = ExtResource("1_4fn8o")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133971832]
@@ -93,5 +94,9 @@ shape = SubResource("CircleShape2D_bge2m")
 [node name="explosion" type="Sprite2D" parent="." unique_id=1576805214]
 texture = ExtResource("3_nfxiy")
 hframes = 8
+
+[node name="explode" type="AudioStreamPlayer2D" parent="." unique_id=1090261956]
+stream = ExtResource("4_6w74q")
+volume_db = 1.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

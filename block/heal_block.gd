@@ -2,6 +2,7 @@ extends Area2D
 @onready var display_scene = preload("res://number_display.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AnimationPlayer.play("basic_spark")
 	var mtimer = Timer.new()
 	add_child(mtimer)
 	mtimer.wait_time = 1.0
@@ -10,7 +11,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position.y -= Gmanager.block_speed*delta
-	if position.y>=400:
+	if position.y>=-500:
 		queue_free()
 
 func create_display():

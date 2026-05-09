@@ -1,6 +1,7 @@
 extends Node
 @onready var gm_over_scene = preload("res://game_over.tscn")
 var points = 0
+var enemy_speed = 0.1
 var player_node: CharacterBody2D = null
 var current_weapon="weapon1"
 var upgrade_coins = 0
@@ -39,13 +40,13 @@ var weapons = {
 		"sprite":preload("res://assets/five_yellow_bullet.png"),
 		"type":"A",
 		"powerup":preload("res://assets/A.png"),
-		"colision": Vector2(6, 6)
+		"colision": Vector2(4, 4)
 		},
 	}
 
 func count_upgrade_level():
 	upgrade_coins+= 1
-	upgrade_level =(upgrade_coins/5)+1
+
 var choosen_weapon = null	
 func choose_weapon():
 	var weapons_name = weapons.keys()
@@ -55,6 +56,8 @@ func choose_weapon():
 	return choosen_weapon
 	#current_weapon = choosen_weapon	
 func _ready() -> void:
+	enemy_speed+=upgrade_coins/10
+	print(enemy_speed)
 	#timer
 	var mtimer = Timer.new()
 	add_child(mtimer)

@@ -23,25 +23,32 @@ func set_block_position():
 	var rand_position_y = 400
 	var new_position_x = global_position.x+rand_position_x
 	var new_position_y =  global_position.y+rand_position_y
-
+	var rand_coin = randi_range(-16,160)
 	var rand_up_pos_x = randi_range(-16,170)	
 	var rand_up_pos_y = randi_range(380,380)
 	#gera numero aleatorio
+
+	var chance_enemy = min(60 + Gmanager.upgrade_coins / 5, 80)
+	var chance_bomb = min(25 + Gmanager.upgrade_coins / 5, 40)
 	var choose_random_item = randi_range(1,100)
-	var chance_enemy = 40+Gmanager.upgrade_level
-	chance_enemy=min(chance_enemy,80)
-	var chance_bomb= 30+Gmanager.upgrade_level
-	chance_enemy=min(chance_enemy,80)
-	if choose_random_item<=90:
-		create_block(new_position_x,new_position_y)
-	elif choose_random_item<=chance_enemy:
-		create_enemy(rand_position_x,new_position_y)
+	#create block
+	create_block(new_position_x,new_position_y)
+	
+	create_coin(new_position_x+rand_coin,new_position_y+rand_coin)
+	if choose_random_item<=10:
+		create_upgrade(rand_up_pos_x,rand_up_pos_y)	
+	elif choose_random_item<=25:
+		create_heal_block(rand_position_x,new_position_y)		
 	elif choose_random_item<=chance_bomb:
 		create_bomb(rand_position_x,new_position_y)
-	elif choose_random_item<=20:
-		create_heal_block(new_position_x,new_position_y)		
-	elif choose_random_item<=15:
-		create_upgrade(rand_up_pos_x,rand_up_pos_y)
+	elif choose_random_item<=chance_enemy:
+		var rand_qt = randi_range(1,3)
+
+		for i in rand_qt:
+			var vary_x = randi_range(-40, 40)
+			var vary_y = randi_range(-40, 40)
+			create_enemy(rand_position_x+vary_x,new_position_y+vary_y)
+
 func create_block(value_x,value_y):
 	print("valorx",value_x)
 	var rand_count = randi_range(1,6)
@@ -57,7 +64,7 @@ func create_block(value_x,value_y):
 		var rand_squad_pos = randi_range(1,3)
 		if x>=rand_squad_pos:	
 			inst.global_position = Vector2(value_x+32*rand_squad_pos,value_y+34)
-			create_coin(value_x+32*rand_squad_pos,value_y+34)
+
 	#chance de aparecer
 
 	var randc = randi_range(-16,132)
@@ -98,7 +105,7 @@ func create_enemy(value_x,value_y):
 	get_tree().current_scene.add_child(inst)
 	
 func _process(delta: float) -> void:
-
+	
 	if Gmanager.player_node:
 		var screen_size = get_viewport_rect().size
 		var marginx = 142
@@ -106,6 +113,6 @@ func _process(delta: float) -> void:
 
 		# Limitamos a posição do player diretamente pelo script do mapa
 		Gmanager.player_node.global_position.x = clampf(Gmanager.player_node.global_position.x, -marginx, screen_size.x -1010)
-		Gmanager.player_node.global_position.y = clampf(Gmanager.player_node.global_position.y, marginy, screen_size.y - 750)
+		Gmanager.player_node.global_position.y = clampf(Gmanager.player_node.global_position.y, marginy, screen_size.y - 650)
 		
 	

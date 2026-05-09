@@ -7,7 +7,7 @@ var current_state = State.OPENING
 @onready var mark = $PinJoint2D/umbrella/Marker2D
 @onready var spritedown = $PinJoint2D/umbrella/Sprite2D
 @onready var spriteup = $PinJoint2D/umbrella/Sprite2D2
-const speed = 250
+const speed = 200
 var is_damage_taken =true
 var up_level = 0
 func _ready() -> void:
@@ -36,16 +36,18 @@ func _physics_process(delta: float) -> void:
 		spriteup.visible=true
 		spritedown.visible=false
 		$PinJoint2D/umbrella/AnimationPlayer.play("up")
+		$PinJoint2D/umbrella/Marker2D.position=Vector2(-8,-35)
 	else:
 		spritedown.visible=true
 		spriteup.visible=false
 		$PinJoint2D/umbrella/AnimationPlayer.play("down")
+		$PinJoint2D/umbrella/Marker2D.position=Vector2(0,-35)
 	move_and_slide()
 	
-func apply_damage():
-	Gmanager.player_life-= 5
 
 func shoot():
+		$hit.play()
+		$hit.pitch_scale=randf_range(0.50,0.9)
 		var scale_value = up_level*0.5
 		var offset = 5*scale_value
 		var inst = proj_scene.instantiate()
@@ -57,8 +59,21 @@ func shoot():
 		inst.scale=Vector2(scale_value,scale_value)
 
 func _on_area_entered(area: Area2D) -> void:
+
 	if area.is_in_group("proj"):
 		if Gmanager.player_life>0:
 			Gmanager.player_life-=1
+			
+		var tween = create_tween()
+		tween.tween_property(spriteup,"modulate",Color(1,0,0),0.2)
+		tween.tween_property(spritedown,"modulate",Color(1,0,0),0.2)
+		tween.tween_property(spriteup,"modulate",Color(1,1,1),0.3)
+		tween.tween_property(spritedown,"modulate",Color(1,1,1),0.3)
 	if area.is_in_group("upgrade"):
 		Gmanager.current_weapon = Gmanager.choosen_weapon	
+	if area.is_in_group("coin"):
+		$coin.play()
+		$coin.pitch_scale=randf_range(0.60,0.8)
+	if area.is_in_group("upgrade"):
+		$upgrade.play()
+		$upgrade.pitch_scale=randf_range(0.50,0.9)

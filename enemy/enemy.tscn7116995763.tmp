@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dsv7fpjs0gilc"]
+
+[ext_resource type="Script" uid="uid://c6mut1q8ygahx" path="res://enemy/enemy.gd" id="1_ofsxj"]
+[ext_resource type="Texture2D" uid="uid://cvj3o50b8ft5r" path="res://assets/explosion1.png" id="2_ofsxj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mvqj"]
+size = Vector2(26, 14)
+
+[sub_resource type="Animation" id="Animation_2mvqj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ppra6"]
+resource_name = "explosion"
+length = 2.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 0.8666667, 1.3, 1.7333333, 2.1666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 2, 3, 0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ofsxj"]
+resource_name = "idle"
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ppra6"]
+_data = {
+&"RESET": SubResource("Animation_2mvqj"),
+&"explosion": SubResource("Animation_ppra6"),
+&"idle": SubResource("Animation_ofsxj")
+}
+
+[node name="enemy" type="Area2D" unique_id=1222894965 groups=["enemy"]]
+script = ExtResource("1_ofsxj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=283845734]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_2mvqj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=266905628]
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1443726325]
+libraries/ = SubResource("AnimationLibrary_ppra6")
+autoplay = &"idle"
+speed_scale = 6.0
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=736027930]
+position = Vector2(0, -12)
+
+[node name="life_bar" type="Marker2D" parent="." unique_id=1339567394]
+position = Vector2(0, 34)
+
+[node name="explosion" type="Sprite2D" parent="." unique_id=289661143]
+texture = ExtResource("2_ofsxj")
+hframes = 8
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

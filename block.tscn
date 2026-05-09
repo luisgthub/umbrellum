@@ -6,11 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oj3tl"]
 size = Vector2(30, 32)
 
-[node name="block" type="RigidBody2D" unique_id=1194377746]
-can_sleep = false
-custom_integrator = true
-contact_monitor = true
-max_contacts_reported = 1
+[node name="block" type="StaticBody2D" unique_id=1639402856]
 script = ExtResource("1_xfwl5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1556841344]

@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("umbrella"):
 	#aqui
+
 		Gmanager.count_upgrade_level()
 		Gmanager.current_weapon = identity_weapon
 		queue_free()

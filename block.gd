@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends StaticBody2D
 @onready var display_scene = preload("res://number_display.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,5 +15,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("proj"):
-		queue_free()
+	if global_position.y<=-500:
+			queue_free()

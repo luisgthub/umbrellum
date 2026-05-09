@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c6mut1q8ygahx" path="res://enemy/enemy.gd" id="1_ofsxj"]
 [ext_resource type="Texture2D" uid="uid://cvj3o50b8ft5r" path="res://assets/explosion1.png" id="2_ofsxj"]
+[ext_resource type="AudioStream" uid="uid://d7upw3sign26" path="res://sounds/Hurt.wav" id="3_ppra6"]
+[ext_resource type="AudioStream" uid="uid://cd3q8plk1fkq6" path="res://sounds/dead.wav" id="4_p200p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mvqj"]
-size = Vector2(26, 14)
+size = Vector2(26, 21)
 
 [sub_resource type="Animation" id="Animation_2mvqj"]
 length = 0.001
@@ -77,7 +79,7 @@ _data = {
 script = ExtResource("1_ofsxj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=283845734]
-position = Vector2(0, 3)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_2mvqj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=266905628]
@@ -86,10 +88,7 @@ hframes = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1443726325]
 libraries/ = SubResource("AnimationLibrary_ppra6")
 autoplay = &"idle"
-speed_scale = 5.0
-
-[node name="Marker2D" type="Marker2D" parent="." unique_id=736027930]
-position = Vector2(0, -12)
+speed_scale = 6.0
 
 [node name="life_bar" type="Marker2D" parent="." unique_id=1339567394]
 position = Vector2(0, 34)
@@ -97,5 +96,13 @@ position = Vector2(0, 34)
 [node name="explosion" type="Sprite2D" parent="." unique_id=289661143]
 texture = ExtResource("2_ofsxj")
 hframes = 8
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="." unique_id=941717448]
+stream = ExtResource("3_ppra6")
+volume_db = 1.0
+
+[node name="dead" type="AudioStreamPlayer2D" parent="." unique_id=2124760159]
+stream = ExtResource("4_p200p")
+volume_db = 1.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

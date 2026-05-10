@@ -3,6 +3,8 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Gmanager.player_life = 0
+	Gmanager.is_game_over = true
 	get_tree().paused = true
 	final_score()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -13,11 +15,11 @@ func _process(delta: float) -> void:
 	
 func final_score():
 	$score.text ="FINAL SCORE: "+str(Gmanager.points)
-
+	
 
 func _on_try_again_pressed() -> void:
 	get_tree().paused = false
-	Gmanager.player_life = 20
+	Gmanager.player_life = 40
 	Gmanager.points = 0
 	Gmanager.upgrade_coins = 0
 	Gmanager.current_weapon = "weapon1"

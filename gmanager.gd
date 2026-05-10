@@ -8,7 +8,7 @@ var player_node: CharacterBody2D = null
 var current_weapon="weapon1"
 var upgrade_coins = 0
 var upgrade_level = 1
-var player_life = clamp(20,0,20)
+var player_life = 30
 var enemy_life = clamp(3,0,3)
 var player_position = null
 var is_game_over = false
@@ -67,7 +67,6 @@ func _ready() -> void:
 	mtimer.start()
 	#end timer
 	enemy_life=4
-	player_life= 20
 	points = 0
 	pass # Replace with function body.
 func weapon_timer():
@@ -80,6 +79,8 @@ func game_over():
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player_life==0 and not is_game_over:
+	player_life = clamp(player_life,0,30)
+	if player_life<=0 and not is_game_over:
+		player_life=0
 		game_over()
 			

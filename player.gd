@@ -60,7 +60,7 @@ func shoot():
 		inst.global_position = mark.global_position +Vector2(0,offset)
 	
 		get_tree().current_scene.add_child(inst)
-		get_tree().create_timer(1.0).timeout.connect(inst.queue_free)
+		get_tree().create_timer(1.5).timeout.connect(inst.queue_free)
 		#permite que o marker sempre esteja num offset a frente do guardachuva
 		inst.scale=Vector2(scale_value,scale_value)
 

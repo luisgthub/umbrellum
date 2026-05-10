@@ -7,7 +7,7 @@ func _ready() -> void:
 func add_score():
 	$score.text ="SCORE: "+str(Gmanager.points)
 func deal_damage():
-	$life.text ="LIFE: "+str(Gmanager.player_life)
+	$life.text ="LIFE: "+str(max(0,Gmanager.player_life))
 func upgrade_coin():
 	$upgrade_coin.text ="UPGRADE COINS: "+str(Gmanager.upgrade_coins)
 func actual_upgrade():
@@ -15,8 +15,7 @@ func actual_upgrade():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	add_score()
 	deal_damage()
+	add_score()
 	upgrade_coin()
 	#actual_upgrade()
-	pass

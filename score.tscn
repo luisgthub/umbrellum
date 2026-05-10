@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crpkmwe8xwmug" path="res://score.gd" id="1_t1x8i"]
 
 [node name="Node2D" type="Control" unique_id=863354953]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_t1x8i")
@@ -16,21 +17,22 @@ offset_bottom = 25.0
 
 [node name="life" type="Label" parent="." unique_id=261705388]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 2.0
-offset_right = 130.0
-offset_bottom = 25.0
+offset_left = 4.0
+offset_top = 35.0
+offset_right = 44.0
+offset_bottom = 58.0
 
 [node name="upgrade_coin" type="Label" parent="." unique_id=1649599640]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 30.0
-offset_right = 115.0
-offset_bottom = 53.0
+offset_left = 3.0
+offset_top = 67.0
+offset_right = 114.0
+offset_bottom = 90.0
+text = "d"
 
 [node name="actual_upgrade" type="Label" parent="." unique_id=750013402]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 57.0
-offset_right = 115.0
-offset_bottom = 80.0
+offset_left = 1.0
+offset_top = 130.0
+offset_right = 112.0
+offset_bottom = 153.0
